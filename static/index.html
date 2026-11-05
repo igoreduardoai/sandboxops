@@ -1,0 +1,21 @@
+<!doctype html><html><head><meta charset="utf-8"><title>SandboxOps · Blast Radius Zero</title>
+<style>body{font-family:system-ui;background:#0b1020;color:#e8ecf5;max-width:980px;margin:30px auto;padding:0 16px}
+button{background:#2f6bff;color:#fff;border:0;padding:10px 14px;border-radius:8px;margin:4px;cursor:pointer;font-size:15px}
+textarea{width:100%;height:70px;background:#121a33;color:#fff;border:1px solid #334;border-radius:8px}
+pre{background:#121a33;padding:12px;border-radius:8px;white-space:pre-wrap}.b{font-size:22px;font-weight:700;padding:12px;border-radius:8px;margin:10px 0}
+.ok{background:#11502e}.blk{background:#7a1020}.n{background:#333}</style></head><body>
+<h1>SandboxOps <small style="color:#8ab">· Blast Radius Zero</small></h1>
+<p>Plan → sandbox → verify → evidence. Every agent action runs contained. <span id="h"></span></p>
+<div id="tasks"></div><textarea id="p" placeholder="Ask the agent (uses Vultr Serverless Inference when configured)"></textarea>
+<button onclick="run({prompt:document.getElementById('p').value})">Plan &amp; run</button>
+<div id="banner"></div><pre id="out"></pre>
+<script>
+fetch('/health').then(r=>r.json()).then(j=>h.textContent=`[backend: ${j.backend} · planner: ${j.planner}]`);
+fetch('/api/tasks').then(r=>r.json()).then(t=>{for(const k in t){const b=document.createElement('button');b.textContent=k;b.title=t[k];b.onclick=()=>run({task:k});tasks.appendChild(b)}});
+async function run(body){banner.className='b n';banner.textContent='running in sandbox…';out.textContent='';
+const j=await (await fetch('/api/run',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})).json();
+if(j.contained){banner.className='b blk';banner.textContent='🛑 CONTAINED: '+(j.sandbox.stderr.split('\n').filter(Boolean).pop()||'')}
+else if(j.verified){banner.className='b ok';banner.textContent='✅ VERIFIED: '+j.sandbox.stdout.trim()}
+else{banner.className='b n';banner.textContent=j.error?('⚠ '+j.error):'ran (not verified)'}
+out.textContent=JSON.stringify(j,null,1)}
+</script></body></html>
