@@ -3,7 +3,7 @@ Uses Vultr Serverless Inference (OpenAI-compatible, https://api.vultrinference.c
 VULTR_INFERENCE_API_KEY is set; otherwise falls back to the deterministic demo planner."""
 import json, os, re, urllib.request
 BASE = os.getenv("VULTR_INFERENCE_BASE", "https://api.vultrinference.com/v1")
-MODEL = os.getenv("VULTR_INFERENCE_MODEL", "llama-3.1-70b-instruct-fp8")
+MODEL = os.getenv("VULTR_INFERENCE_MODEL", "glm-5.3")
 SYSTEM = ("You write a single self-contained Python 3 script that solves the user's task and prints only the "
           "final answer. Standard library only. No network, no file writes outside /tmp. Reply with code only.")
 def llm_available():
