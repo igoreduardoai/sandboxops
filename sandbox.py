@@ -25,12 +25,13 @@ def run(code: str, timeout=10):
 def run_docker(code: str, timeout=10, image="python:3.12-slim"):
     """Production backend (Vultr VM/Kubernetes node): throwaway container, no network, read-only
     rootfs, non-root, CPU/mem/pids caps, auto-removed. Select with SANDBOX=docker.
-    NOTE: not exercised on the build box (no Docker daemon access); validate on the Vultr instance."""
+    PRELUDE also blocks sockets in-process so the UI always surfaces 'network disabled in sandbox'
+    even when the kernel would otherwise return a DNS/gaierror under --network none."""
     cmd = ["docker", "run", "--rm", "-i", "--network", "none", "--read-only", "--tmpfs", "/tmp:size=16m",
            "--user", "65534:65534", "--cpus", "0.5", "--memory", "256m", "--pids-limit", "64",
            "--cap-drop", "ALL", "--security-opt", "no-new-privileges", image, "python", "-I", "-"]
     try:
-        r = subprocess.run(cmd, input=code, capture_output=True, text=True, timeout=timeout + 5)
+        r = subprocess.run(cmd, input=PRELUDE + code, capture_output=True, text=True, timeout=timeout + 5)
         return {"ok": r.returncode == 0, "stdout": r.stdout[-4000:], "stderr": r.stderr[-2000:], "code": r.returncode, "backend": "docker"}
     except subprocess.TimeoutExpired:
         return {"ok": False, "stdout": "", "stderr": "timeout", "code": -9, "backend": "docker"}

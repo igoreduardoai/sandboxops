@@ -1,2 +1,6 @@
 __pycache__/
 *.bak-*
+
+.secrets/
+.env
+*.key

@@ -5,20 +5,31 @@ SandboxOps turns every agent task into **plan → sandbox → verify → evidenc
 
 Built for the lablab.ai **Vultr Agent Rush** hackathon (Challenge 1: Blast Radius Zero). MIT licensed.
 
+**Live demo (Vultr Cloud Compute, Chicago):** http://64.177.13.126/  
+`/health` → `{"status":"ok","backend":"docker","planner":"vultr-inference"}`
+
 ## How Vultr is used
 | Piece | Where it runs |
 |---|---|
-| Web app + API (`app.py`, port 80, `/health`) | **Vultr Cloud Compute VM** (Ubuntu), systemd service |
+| Web app + API (`app.py`, port 80, `/health`) | **Vultr Cloud Compute VM** (Ubuntu 24.04, 2 GB, Chicago), systemd `sandboxops` |
 | Sandbox for every agent action (`SANDBOX=docker`) | Throwaway Docker containers **on the same Vultr VM**: `--network none`, read-only rootfs, non-root, all capabilities dropped, CPU/memory/pids caps, auto-removed |
-| Planner (natural language → Python) | **Vultr Serverless Inference**, OpenAI-compatible API at `https://api.vultrinference.com/v1` (`VULTR_INFERENCE_API_KEY`, model via `VULTR_INFERENCE_MODEL`) |
+| Planner (natural language → Python) | **Vultr Serverless Inference**, OpenAI-compatible API at `https://api.vultrinference.com/v1` (model **`glm-5.3`**) |
 
 No Vultr GPUs are used. Without an inference key the app still runs the built-in demo tasks (offline planner).
+
+## Live results (2026-11-05, America/Chicago)
+| Task | Result |
+|---|---|
+| `bill` | **VERIFIED** `$551.00` (Docker backend) |
+| free-form prompt `sum of first 50 primes` | planner `vultr-inference:glm-5.3` → stdout **`5117`** (correct) |
+| `network_attempt` | **CONTAINED** — socket blocked / no network in sandbox |
+| `fork_bomb_ish` | **CONTAINED** — killed by sandbox timeout/CPU limit |
 
 ## Architecture
 ```mermaid
 flowchart LR
   U[User / browser] -->|HTTP :80| A[SandboxOps app<br/>Vultr Cloud Compute VM]
-  A -->|prompt| I[Vultr Serverless Inference<br/>api.vultrinference.com/v1]
+  A -->|prompt| I[Vultr Serverless Inference<br/>api.vultrinference.com/v1 · glm-5.3]
   I -->|Python code| A
   A -->|docker run --network none --read-only --cap-drop ALL| S[(Disposable sandbox container)]
   S -->|stdout / stderr / exit code| A
@@ -29,7 +40,7 @@ flowchart LR
 
 ## The containment moment
 Click `network_attempt`: agent-written code tries to open a socket to the internet. The sandbox refuses
-(`network disabled in sandbox` locally; no network interface at all in Docker) and the UI shows a red **CONTAINED** banner.
+(`network disabled in sandbox` via in-process block; Docker also has `--network none`) and the UI shows a red **CONTAINED** banner.
 `fork_bomb_ish` (infinite loop) is killed by the CPU limit/timeout. `bill` computes a patient bill and is **verified** at `$551.00`.
 
 ## Quickstart
@@ -50,10 +61,10 @@ python3 test_app.py     # 5/5: /health, verified run, two containment runs, UI s
 ```
 
 ## Honest limitations
-- The local backend blocks network at the Python socket level (best effort); real isolation is the Docker backend.
-- The Docker backend and the deploy script are meant for the Vultr VM; check the live URL for the current status.
+- The local backend blocks network at the Python socket level (best effort); real isolation is the Docker backend on the Vultr VM.
 - Free-form prompts are executed and contained but not auto-verified (no ground-truth check); only the demo tasks have checks.
 - Containers share the VM kernel; gVisor or per-task VMs would be the next hardening step.
+- The public demo IP is a temporary hackathon VM (credits); treat it as ephemeral.
 
 ## Roadmap
 gVisor runtime · per-tenant audit log export · policy file (allowed packages, egress allowlist) · signed evidence.

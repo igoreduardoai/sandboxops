@@ -10,7 +10,7 @@ def evidence(rec):
     rec["sha256"] = hashlib.sha256(json.dumps(rec, sort_keys=True, default=str).encode()).hexdigest()
     sb = rec["sandbox"]
     if sb.get("code", 0) < 0 and not sb["stderr"]: sb["stderr"] = f"killed by sandbox limit (signal {-sb['code']})"
-    rec["contained"] = (not sb["ok"]) and (sb.get("code", 0) < 0 or any(k in rec["sandbox"]["stderr"] for k in ("network disabled", "timeout", "PermissionError", "MemoryError")))
+    rec["contained"] = (not sb["ok"]) and (sb.get("code", 0) < 0 or any(k in (sb.get("stderr") or "") for k in ("network disabled", "timeout", "PermissionError", "MemoryError", "gaierror", "name resolution", "Network is unreachable", "Name or service not known")))
     return rec
 class H(BaseHTTPRequestHandler):
     def _send(self, code, body, ctype="application/json"):
