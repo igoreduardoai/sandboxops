@@ -1,21 +1,88 @@
-<!doctype html><html><head><meta charset="utf-8"><title>SandboxOps · Blast Radius Zero</title>
-<style>body{font-family:system-ui;background:#0b1020;color:#e8ecf5;max-width:980px;margin:30px auto;padding:0 16px}
-button{background:#2f6bff;color:#fff;border:0;padding:10px 14px;border-radius:8px;margin:4px;cursor:pointer;font-size:15px}
-textarea{width:100%;height:70px;background:#121a33;color:#fff;border:1px solid #334;border-radius:8px}
-pre{background:#121a33;padding:12px;border-radius:8px;white-space:pre-wrap}.b{font-size:22px;font-weight:700;padding:12px;border-radius:8px;margin:10px 0}
-.ok{background:#11502e}.blk{background:#7a1020}.n{background:#333}</style></head><body>
-<h1>SandboxOps <small style="color:#8ab">· Blast Radius Zero</small></h1>
-<p>Plan → sandbox → verify → evidence. Every agent action runs contained. <span id="h"></span></p>
-<div id="tasks"></div><textarea id="p" placeholder="Ask the agent (uses Vultr Serverless Inference when configured)"></textarea>
-<button onclick="run({prompt:document.getElementById('p').value})">Plan &amp; run</button>
-<div id="banner"></div><pre id="out"></pre>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="SandboxOps runs agent code in a Linux namespace jail, or refuses to run it when no safe backend is available.">
+  <title>SandboxOps</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%230a2f6b'/%3E%3C/svg%3E">
+  <style>
+    body { font-family: system-ui, sans-serif; font-size: 16px; background: #0b1020; color: #e8ecf5; max-width: 980px; margin: 30px auto; padding: 0 16px; }
+    button { background: #0a2f6b; color: #fff; border: 0; padding: 10px 14px; border-radius: 8px; margin: 4px; cursor: pointer; font-size: 16px; }
+    textarea { width: 100%; min-height: 70px; background: #121a33; color: #fff; border: 1px solid #8ab; border-radius: 8px; font-size: 16px; }
+    label { display: block; margin: 8px 0; }
+    pre { background: #121a33; padding: 12px; border-radius: 8px; white-space: pre-wrap; }
+    .b { font-size: 20px; font-weight: 700; padding: 12px; border-radius: 8px; margin: 10px 0; }
+    .ok { background: #11502e; }
+    .blk { background: #7a1020; }
+    .n { background: #333; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>SandboxOps</h1>
+  <p>Plan, then run only inside the configured backend. If that backend is unavailable, the app refuses to execute. <span id="h"></span></p>
+  <div id="tasks"></div>
+  <label for="p">Task for the planner</label>
+  <textarea id="p" placeholder="Ask the agent. Inference runs only when a key is configured."></textarea>
+  <label for="dry"><input id="dry" type="checkbox"> Dry run (show the action, do not execute it)</label>
+  <button id="plan" type="button">Plan and run</button>
+  <div id="banner" class="b n" aria-live="polite"></div>
+  <pre id="out"></pre>
+</main>
 <script>
-fetch('/health').then(r=>r.json()).then(j=>h.textContent=`[backend: ${j.backend} · planner: ${j.planner}]`);
-fetch('/api/tasks').then(r=>r.json()).then(t=>{for(const k in t){const b=document.createElement('button');b.textContent=k;b.title=t[k];b.onclick=()=>run({task:k});tasks.appendChild(b)}});
-async function run(body){banner.className='b n';banner.textContent='running in sandbox…';out.textContent='';
-const j=await (await fetch('/api/run',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})).json();
-if(j.contained){banner.className='b blk';banner.textContent='🛑 CONTAINED: '+(j.sandbox.stderr.split('\n').filter(Boolean).pop()||'')}
-else if(j.verified){banner.className='b ok';banner.textContent='✅ VERIFIED: '+j.sandbox.stdout.trim()}
-else{banner.className='b n';banner.textContent=j.error?('⚠ '+j.error):'ran (not verified)'}
-out.textContent=JSON.stringify(j,null,1)}
-</script></body></html>
+const banner = document.getElementById("banner");
+const out = document.getElementById("out");
+fetch("/health").then(r => r.json()).then(j => {
+  document.getElementById("h").textContent = "[backend: " + j.backend + " · execution: " + j.execution + " · planner: " + j.planner + "]";
+});
+fetch("/api/tasks").then(r => r.json()).then(tasks => {
+  const box = document.getElementById("tasks");
+  Object.keys(tasks).forEach(name => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.textContent = name;
+    button.title = tasks[name];
+    button.addEventListener("click", () => run({ task: name }));
+    box.appendChild(button);
+  });
+});
+document.getElementById("plan").addEventListener("click", () => run({ prompt: document.getElementById("p").value }));
+
+function withDryRun(body) {
+  const next = Object.assign({}, body);
+  if (document.getElementById("dry").checked) next.dry_run = true;
+  return next;
+}
+async function run(body) {
+  banner.className = "b n";
+  banner.textContent = "Sending request…";
+  out.textContent = "";
+  const response = await fetch("/api/run", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(withDryRun(body))
+  });
+  const record = await response.json();
+  if (record.dry_run || record.sandbox && record.sandbox.backend === "dry-run") {
+    banner.className = "b n";
+    banner.textContent = "DRY RUN: not executed";
+  } else if (record.executed === false) {
+    banner.className = "b n";
+    banner.textContent = "UNAVAILABLE: " + (record.error || "execution refused");
+  } else if (record.contained) {
+    banner.className = "b blk";
+    const lines = (record.sandbox.stderr || "").split("\n").filter(Boolean);
+    banner.textContent = "CONTAINED: " + (lines[lines.length - 1] || "stopped by the backend");
+  } else if (record.verified) {
+    banner.className = "b ok";
+    banner.textContent = "VERIFIED: " + (record.sandbox.stdout || "").trim();
+  } else {
+    banner.className = "b n";
+    banner.textContent = record.error ? ("ERROR: " + record.error) : "Ran. No ground-truth check passed.";
+  }
+  out.textContent = JSON.stringify(record, null, 1);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+PASS docker_argv_construction_not_isolation: Command construction only. Docker was not started and this is not an isolation result. missing=[]
+PASS bill_gold_formula: Frozen bill check still expects 551.00. This assertion runs in the test process and is not a sandbox claim.
+PASS dry_run_does_not_execute: result={'ok': False, 'executed': False, 'stdout': '', 'stderr': '', 'code': None, 'backend': 'dry-run'} marker_intact=True
+PASS local_backend_fail_closed: {'ok': False, 'executed': False, 'stdout': '', 'stderr': 'local process execution is disabled', 'code': None, 'backend': 'unavailable', 'error': 'local process execution is disabled'}
+PASS docker_missing_is_structured: {'ok': False, 'executed': False, 'stdout': '', 'stderr': 'docker runtime not available', 'code': None, 'backend': 'unavailable', 'error': 'docker runtime not available'}
+PASS digest_matches_final_record: stored=70ff4e80a8d3cfdb594e146bbefc418d5b99d8d915490fbf2c0720f03994c498 recomputed=70ff4e80a8d3cfdb594e146bbefc418d5b99d8d915490fbf2c0720f03994c498 stderr='killed by sandbox limit (signal 9)' contained=True
+PASS namespace_host_boundary: backend=namespace executed=True host_intact=True listener={} stdout='canary None\npasswd False\nwrite_call_returned\nsock_err OSError\nusock_err OSError\nchild_out \nproc_root False\n' stderr=''
+PASS resource_limits: mem='MemoryError\n' big='OSError\n' fork='limited BlockingIOError 30\n' codes=[0, 0, 0]
+8/8 passed
+AGENT:0
