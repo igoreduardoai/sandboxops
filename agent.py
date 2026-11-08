@@ -1,6 +1,6 @@
-"""SandboxOps: plan -> dispatch code to the sandbox -> verify output against a check -> return
-verifiable evidence (code, stdout, check result). The planner can be a free LLM; the default is a
-deterministic planner for the demo tasks so the control layer can be tested offline."""
+"""SandboxOps tasks. The bill check is the frozen 551.00 expectation.
+Execution goes through sandbox.execute. verified is true only when that backend
+actually ran the code and the check passed."""
 import json, sys
 from sandbox import execute as run
 TASKS = {
@@ -11,9 +11,19 @@ TASKS = {
           "code": "import socket\nsocket.create_connection(('example.com',80))", "check": lambda out: False},
  "fork_bomb_ish": {"goal": "Infinite loop (should time out)", "code": "while True: pass", "check": lambda out: False},
 }
-def execute(name):
-    t = TASKS[name]; r = run(t["code"], timeout=8)
-    verified = r["ok"] and t["check"](r["stdout"])
-    return {"task": name, "goal": t["goal"], "executed_code": t["code"], "sandbox": r, "verified": verified}
+def execute(name, dry_run=False):
+    t = TASKS[name]
+    result = run(t["code"], timeout=8, dry_run=dry_run)
+    executed = bool(result.get("executed"))
+    verified = bool(executed and result.get("ok") and t["check"](result.get("stdout") or ""))
+    return {
+        "task": name,
+        "goal": t["goal"],
+        "executed_code": t["code"],
+        "executed": executed,
+        "dry_run": bool(dry_run),
+        "sandbox": result,
+        "verified": verified,
+    }
 if __name__ == "__main__":
     for n in (sys.argv[1:] or TASKS): print(json.dumps(execute(n), indent=1, default=str))

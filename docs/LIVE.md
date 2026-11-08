@@ -1,3 +1,7 @@
+# Live deployment note from 2026-11-05
+
+This file records the earlier deployment. The repair candidate did not open this host, did not redeploy it, and does not treat these lines as a fresh test.
+
 # Live deployment
 
 - **URL:** http://64.177.13.126/

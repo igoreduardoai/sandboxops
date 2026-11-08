@@ -1,0 +1,14 @@
+PASS health: {'status': 'up', 'backend': 'namespace', 'execution': 'namespace', 'planner': 'offline'}
+PASS ui_served: HTTP 200 bytes=4110 button_contrast=12.87
+PASS favicon_no_404: HTTP 204
+PASS bill_executed_in_backend: HTTP 200 verified=True backend=namespace stdout='551.00' digest_ok=True
+PASS api_dry_run: executed=False verified=False backend=dry-run
+PASS network_contained: contained=True stderr='nfo\n    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsocket.gaierror: [Errno -3] Temporary failure in name resolution\n'
+PASS loop_contained: contained=True code=137 stderr='sandbox-signal: 9\n'
+PASS bad_json: HTTP 400 b'{"error": "bad json"}'
+PASS missing_task: HTTP 400
+PASS planner_error_is_json: HTTP 503 body=b'{"error": "planner failed", "executed": false}'
+PASS health_after_planner_error: {"status": "up", "backend": "namespace", "execution": "namespace", "planner": "offline"}
+PASS offline_prompt_not_executed: HTTP 503 {'error': 'LLM planner offline', 'executed': False, 'planner': 'offline', 'code': None, 'note': 'VULTR_INFERENCE_API_KEY not set'}
+12/12 passed
+APP:0

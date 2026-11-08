@@ -1,0 +1,12 @@
+PASS bill_gold_formula: Frozen bill check still expects 551.00. This assertion runs in the test process and is not a sandbox claim.
+Traceback (most recent call last):
+  File "/workspace/test_agent.py", line 234, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/workspace/test_agent.py", line 222, in main
+    test_dry_run_does_not_touch_host()
+  File "/workspace/test_agent.py", line 50, in test_dry_run_does_not_touch_host
+    result = execute(
+             ^^^^^^^^
+TypeError: execute() got an unexpected keyword argument 'dry_run'
+AGENT:1

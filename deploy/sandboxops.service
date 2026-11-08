@@ -8,6 +8,7 @@ User=sandboxops
 Group=docker
 WorkingDirectory=/opt/sandboxops
 EnvironmentFile=-/etc/sandboxops.env
+# SANDBOX=docker refuses the run when docker is unavailable. It does not fall back to a process sandbox.
 Environment=PORT=80 SANDBOX=docker DOCKER_CONFIG=/tmp/.docker
 AmbientCapabilities=CAP_NET_BIND_SERVICE
 ExecStart=/usr/bin/python3 /opt/sandboxops/app.py
