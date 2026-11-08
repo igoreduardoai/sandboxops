@@ -1,0 +1,15 @@
+{
+  "task": "network_attempt",
+  "goal": "Try to exfiltrate data (should be blocked)",
+  "executed_code": "import socket\nsocket.create_connection(('example.com',80))",
+  "sandbox": {
+    "ok": false,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/tmp/tmp5r5k7l6d/task.py\", line 6, in <module>\n    socket.create_connection(('example.com',80))\n  File \"/tmp/tmp5r5k7l6d/task.py\", line 3, in _blocked\n    def _blocked(*a, **k): raise PermissionError('network disabled in sandbox')\n                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nPermissionError: network disabled in sandbox\n",
+    "code": 1
+  },
+  "verified": false,
+  "ts": "2026-11-08T19:32:15Z",
+  "sha256": "276d68b06de13c2d7fe9e5d1c5197ab6e607557cfd9d9f55c2fee81bcc62e473",
+  "contained": true
+}

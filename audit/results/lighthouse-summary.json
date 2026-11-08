@@ -1,0 +1,51 @@
+{
+  "lighthouseVersion": "12.8.2",
+  "requestedUrl": "http://127.0.0.1:45859/",
+  "finalUrl": "http://127.0.0.1:45859/",
+  "categories": {
+    "accessibility": {
+      "score": 0.76,
+      "title": "Accessibility"
+    },
+    "best-practices": {
+      "score": 0.89,
+      "title": "Best Practices"
+    },
+    "seo": {
+      "score": 0.9,
+      "title": "SEO"
+    }
+  },
+  "failingAudits": [
+    {
+      "id": "errors-in-console",
+      "title": "Browser errors were logged to the console",
+      "score": 0,
+      "displayValue": null
+    },
+    {
+      "id": "color-contrast",
+      "title": "Background and foreground colors do not have a sufficient contrast ratio.",
+      "score": 0,
+      "displayValue": null
+    },
+    {
+      "id": "html-has-lang",
+      "title": "`<html>` element does not have a `[lang]` attribute",
+      "score": 0,
+      "displayValue": null
+    },
+    {
+      "id": "meta-description",
+      "title": "Document does not have a meta description",
+      "score": 0,
+      "displayValue": null
+    },
+    {
+      "id": "font-size",
+      "title": "Document doesn't use legible font sizes",
+      "score": 0,
+      "displayValue": null
+    }
+  ]
+}

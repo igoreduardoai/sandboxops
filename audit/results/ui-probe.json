@@ -1,0 +1,132 @@
+{
+  "ok": true,
+  "errors": [],
+  "axe": {
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": [
+              "button:nth-child(1)"
+            ],
+            "html": "<button title=\"Compute patient responsibility for allowed $620+$95+$40 with $500 deductible and 20% coinsurance\">bill</button>"
+          },
+          {
+            "target": [
+              "button:nth-child(2)"
+            ],
+            "html": "<button title=\"Try to exfiltrate data (should be blocked)\">network_attempt</button>"
+          },
+          {
+            "target": [
+              "button:nth-child(3)"
+            ],
+            "html": "<button title=\"Infinite loop (should time out)\">fork_bomb_ish</button>"
+          },
+          {
+            "target": [
+              "body > button"
+            ],
+            "html": "<button onclick=\"run({prompt:document.getElementById('p').value})\">Plan &amp; run</button>"
+          }
+        ]
+      },
+      {
+        "id": "html-has-lang",
+        "impact": "serious",
+        "help": "<html> element must have a lang attribute",
+        "nodes": [
+          {
+            "target": [
+              "html"
+            ],
+            "html": "<html>"
+          }
+        ]
+      },
+      {
+        "id": "landmark-one-main",
+        "impact": "moderate",
+        "help": "Document should have one main landmark",
+        "nodes": [
+          {
+            "target": [
+              "html"
+            ],
+            "html": "<html>"
+          }
+        ]
+      },
+      {
+        "id": "region",
+        "impact": "moderate",
+        "help": "All page content should be contained by landmarks",
+        "nodes": [
+          {
+            "target": [
+              "h1"
+            ],
+            "html": "<h1>SandboxOps <small style=\"color:#8ab\">· Blast Radius Zero</small></h1>"
+          },
+          {
+            "target": [
+              "p"
+            ],
+            "html": "<p>Plan → sandbox → verify → evidence. Every agent action runs contained. <span id=\"h\">[backend: local · planner: offline]</span></p>"
+          },
+          {
+            "target": [
+              "#p"
+            ],
+            "html": "<textarea id=\"p\" placeholder=\"Ask the agent (uses Vultr Serverless Inference when configured)\" style=\"\"></textarea>"
+          }
+        ]
+      }
+    ],
+    "violationCount": 4,
+    "passes": 13,
+    "incomplete": 1
+  },
+  "tabOrder": [
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "bill"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "network_attempt"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "fork_bomb_ish"
+    },
+    {
+      "tag": "TEXTAREA",
+      "id": "p",
+      "text": "Ask the agent (uses Vultr Serverless Inference when configur"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "Plan & run"
+    },
+    {
+      "tag": "BODY",
+      "id": "",
+      "text": "SandboxOps · Blast Radius Zero\n\nPlan → sandbox → verify → ev"
+    }
+  ],
+  "containedText": "🛑 CONTAINED: PermissionError: network disabled in sandbox",
+  "offlineText": "⚠ LLM planner offline",
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+  ],
+  "title": "SandboxOps · Blast Radius Zero"
+}

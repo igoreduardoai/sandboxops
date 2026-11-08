@@ -1,0 +1,43 @@
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 41334)
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/usr/lib/python3.12/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/lib/python3.12/socketserver.py", line 761, in __init__
+    self.handle()
+  File "/usr/lib/python3.12/http/server.py", line 436, in handle
+    self.handle_one_request()
+  File "/usr/lib/python3.12/http/server.py", line 424, in handle_one_request
+    method()
+  File "/workspace/app.py", line 35, in do_POST
+    p = planner.plan(prompt)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/audit/run_audit.py", line 378, in exploding_plan
+    raise RuntimeError("stub-planner-down")
+RuntimeError: stub-planner-down
+----------------------------------------
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 41398)
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/socketserver.py", line 692, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/usr/lib/python3.12/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/lib/python3.12/socketserver.py", line 761, in __init__
+    self.handle()
+  File "/usr/lib/python3.12/http/server.py", line 436, in handle
+    self.handle_one_request()
+  File "/usr/lib/python3.12/http/server.py", line 424, in handle_one_request
+    method()
+  File "/workspace/app.py", line 35, in do_POST
+    p = planner.plan(prompt)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/planner.py", line 18, in plan
+    with urllib.request.urlopen(req, timeout=60) as r:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/audit/run_audit.py", line 725, in outage
+    raise urllib.error.URLError("stub-network-down")
+urllib.error.URLError: <urlopen error stub-network-down>
+----------------------------------------

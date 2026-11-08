@@ -1,0 +1,12 @@
+{
+  "cmd": [
+    "node",
+    "/workspace/audit/ui_probe.mjs",
+    "http://127.0.0.1:45859",
+    "/workspace/audit/results"
+  ],
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "seconds": 1.447
+}

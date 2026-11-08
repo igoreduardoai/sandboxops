@@ -1,0 +1,63 @@
+[pass] baseline_identity: HEAD 16595487162fac6df3f38247b77bd27075291ccc; baseline 16595487162fac6df3f38247b77bd27075291ccc ancestor=True; demo ref bea5d337dcab77beac6577533c29ed8ff7b31ea4
+[pass] product_tree_dirty: product files have no uncommitted edits
+[pass] code_identical_demo_ref_to_baseline: Executable and non-README files are identical between documented demo ref and tested main baseline
+[unknown] judged_commit_pin: Public entry links the GitHub repo and does not embed either SHA. This audit does not treat tested main as the submitted artifact.
+[pass] upstream_test_agent: exit 0 in 5.067s; stdout '[True, True, True] 3/3 passed'
+[pass] upstream_test_app: exit 0 in 6.604s; stdout '[True, True, True, True, True] 5/5 passed'
+[fail] upstream_exit_code_is_unconditional: test_agent.py and test_app.py print a count and do not call sys.exit with a failure status. Exit 0 does not by itself prove a future failure would fail CI.
+[pass] health_offline_local: HTTP 200 {'status': 'ok', 'backend': 'local', 'planner': 'offline'}
+[pass] tasks_listed: HTTP 200 keys=['bill', 'network_attempt', 'fork_bomb_ish']
+[pass] ui_served: HTTP 200 bytes=2080 contains SandboxOps=True; task buttons are client-rendered
+[pass] bill_verified: HTTP 200 verified=True stdout='551.00' contained=False
+[pass] builtin_socket_contained: HTTP 200 contained=True verified=False stderr_tail=':'
+[pass] builtin_loop_contained: HTTP 200 in 5.006s contained=True ok=False code=-9 stderr='killed by sandbox limit (signal 9)'. This is the built-in bounded infinite loop, not an unbounded host fork bomb.
+[pass] bad_json: HTTP 400 body=b'{"error": "bad json"}'
+[pass] empty_object: HTTP 400 body=b'{"error": "task or prompt required"}'
+[pass] unknown_get: HTTP 404
+[pass] unknown_task_no_prompt: HTTP 400 body=b'{"error": "task or prompt required"}'
+[fail] dry_run_flag_ignored: POST {task:bill, dry_run:true} still executed and verified 551.00. No dry_run/dry-run symbol exists in the product modules.
+[pass] offline_prompt_does_not_execute: HTTP 503 planner=offline code=None listener={}
+[pass] task_precedence_over_prompt: HTTP 200 task=bill verified=True
+[pass] prompt_truncated_to_2000: planner received length 2000 HTTP 503. Stub recorder returned no code; no provider call.
+[fail] planner_exception_structured: planner exception HTTP None body=b"RemoteDisconnected('Remote end closed connection without response')"
+[pass] server_survives_planner_exception: subsequent /health HTTP 200 {'status': 'ok', 'backend': 'local', 'planner': 'offline'}
+[pass] bill_after_contained_and_errors: verified=True stdout='551.00'
+[pass] local_env_strips_parent: ok=True keys_line_count=2 canary_visible=False
+[pass] local_python_isolated_flag: stdout='1' stderr=''
+[fail] local_host_file_read_blocked: child_ok=True saw_host_marker=True stderr=''
+[fail] local_host_file_write_blocked: child_ok=True marker_written=True stderr=''
+[pass] local_cwd_outside_repo_and_removed: cwd='/tmp/tmp61pkykjw' still_exists=False
+[fail] local_etc_passwd_not_readable: stdout='readable True'
+[pass] prelude_blocks_socket_module: stdout='' listener={} stderr_tail='r'
+[fail] underscore_socket_bypass_blocked: stdout='bypassed\n' listener={'data': 'bypass'} stderr=''
+[fail] subprocess_localhost_bypass_blocked: stdout='rc 0\n\n\n' listener={'data': 'child'}
+[fail] local_single_fork_blocked: stdout='fork-ok' stderr='' code=0. One child, then exit; not a fork bomb.
+[pass] local_memory_cap: ok=True code=0 stdout='MemoryError' stderr=''
+[pass] local_fsize_cap: ok=True stdout='OSError' stderr=''
+[infra_blocker] docker_runtime: docker binary is not installed in this VM (which/docker empty, earlier docker info exit 127). Production container isolation was not executed. This is not a pass.
+[fail] docker_missing_returns_structured_result: exit 1 stderr_tail=','
+[pass] docker_argv_stub_contains_documented_flags: STUB only: subprocess.run was replaced and Docker was not started. Flag construction is not runtime enforcement.
+[fail] evidence_hash_covers_final_record: sha256 is computed before contained is added and before an empty negative-code stderr is rewritten. A hash of the returned object does not match the field.
+[fail] loop_evidence_stderr_rewritten_after_hash: fork_bomb_ish stderr is the post-hash message 'killed by sandbox limit (signal 9)'. stored==reconstructed_empty_stderr:True stored==returned_without_sha_and_contained:False
+[fail] bill_hash_matches_body_minus_sha_field: Recomputed SHA-256 of the bill response with the sha256 field removed does not match; contained is outside the hash (hash_without_sha_and_contained=e648d839ea62418c2680e43675a3a3a5
+[pass] stub_planner_executes_model_code: STUB provider. HTTP 200 planner=vultr-inference:glm-5.3 verified=None stdout='4'
+[fail] stub_dry_run_still_executes: STUB provider. dry_run:true on a prompt still ran the planned code and printed 4.
+[pass] stub_sandbox_hides_canary_and_key: STUB provider. stdout='canary False\nkey False\nnkeys 2'
+[fail] stub_model_underscore_socket_contained: STUB provider. Model code using _socket leaked=True contained=False listener={'data': 'stub'} stdout='socket-bypass\n'
+[fail] stub_provider_outage_structured: STUB URLError HTTP None body=b"RemoteDisconnected('Remote end closed connection without response')"
+[pass] health_offline_after_stub_cleanup: planner=offline stub_calls=4 hosts=['api.vultrinference.com']
+[unknown] live_evaluator_present: No evaluator or critic module is in this source tree. The deterministic checklist later in this run restates these checks. It is not an independent LLM judge and not a live evaluat
+[fail] html_lang: index.html root is <html> without lang
+[fail] textarea_label: The prompt textarea has a placeholder and no label element
+[fail] banner_live_region: Result banner has no aria-live region
+[fail] css_contrast_aa_normal_text: WCAG AA 4.5:1 unrounded ratios {'body_text': 16.001, 'health_span_8ab': 7.676, 'button': 4.499, 'banner_ok': 8.028, 'banner_contained': 9.232, 'banner_neutral': 10.678}. Below 4.5:
+[pass] ui_keyboard_main_journey: keyboard contained='🛑 CONTAINED: PermissionError: network disabled in sandbox' offline='⚠ LLM planner offline' tab_order=[{'tag': 'BUTTON', 'id': '', 'text': 'bill'}, {'tag': 'BUTT
+[fail] axe: axe violations=4 passes=13 incomplete=1
+[pass] lighthouse: Lighthouse completed. Category scores are tool output, not a hackathon grade or readiness score.
+[unknown] retry_loop_implemented: Pattern A on the event page describes feeding errors back for retries. This source has one execution pass and no retry loop. The page says one or both patterns; absence is recorded
+[not_applicable] pattern_b_browser_sandbox: No Playwright or browser-sandbox path is in this source. Challenge text says pattern A or pattern B. Not counted as pass or fail.
+[skipped] public_vm_and_live_inference: Not run. This audit does not contact http://64.177.13.126/ and does not call Vultr Serverless Inference. README and docs/LIVE.md claim a 2026-11-05 docker/vultr-inference demo. Tho
+[unknown] post_submit_edit_semantics: Fetched rule book says submissions close at the event-page deadline plus a five-minute grace period. It does not say whether a later git push changes the judged revision. No behavi
+[unknown] category_saved: Anonymous project HTML on this run shows categories [Assistant] and eventTracks []. That does not prove a private form field, and it also does not show a saved C1 track. Not marked
+COUNTS {"pass": 32, "unknown": 5, "fail": 21, "infra_blocker": 1, "not_applicable": 1, "skipped": 1} TOTAL 61
+WROTE /workspace/audit/results/results.json
