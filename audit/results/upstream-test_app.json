@@ -1,0 +1,10 @@
+{
+  "cmd": [
+    "/usr/bin/python3",
+    "test_app.py"
+  ],
+  "exit_code": 0,
+  "stdout": "[True, True, True, True, True] 5/5 passed\n",
+  "stderr": "",
+  "seconds": 6.604
+}

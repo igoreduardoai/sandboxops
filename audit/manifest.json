@@ -1,0 +1,40 @@
+{
+  "app": "SandboxOps",
+  "purpose": "Ephemeral audit manifest for this isolated copy. Scenarios describe SandboxOps behavior only.",
+  "not_grave_truth_eob": true,
+  "harness_source": {
+    "requested": [
+      "https://github.com/igoreduardoai/grave-truth/pull/4",
+      "https://github.com/igoreduardoai/grave-truth/pull/5",
+      "branch cursor/evaluator-critic-loop-ad9d",
+      "reported tip 4a99c8e"
+    ],
+    "access_from_this_vm": "repository not found (HTTP 404 / git ls-remote). No GraveTruth files were copied. No EOB fixtures were transplanted."
+  },
+  "provider": "stub_or_offline_only",
+  "forbidden": [
+    "public Vultr VM requests",
+    "paid inference",
+    "cloud provisioning",
+    "reading provider secret values",
+    "changing application behavior",
+    "submission or portal edits"
+  ],
+  "categories": [
+    "main_journey",
+    "destructive_boundaries",
+    "blast_radius",
+    "dry_run_vs_execute",
+    "failure_recovery",
+    "adversarial_inputs",
+    "evidence",
+    "ui_keyboard_axe_lighthouse",
+    "upstream_tests",
+    "rules_mapping_unknowns"
+  ],
+  "product_refs": {
+    "tested_main_sha": "16595487162fac6df3f38247b77bd27075291ccc",
+    "documented_demo_sha": "bea5d337dcab77beac6577533c29ed8ff7b31ea4",
+    "judged_pin": "unknown"
+  }
+}

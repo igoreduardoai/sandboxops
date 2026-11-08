@@ -1,0 +1,10 @@
+{
+  "cmd": [
+    "/usr/bin/python3",
+    "test_agent.py"
+  ],
+  "exit_code": 0,
+  "stdout": "[True, True, True] 3/3 passed\n",
+  "stderr": "",
+  "seconds": 5.067
+}

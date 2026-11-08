@@ -1,0 +1,12 @@
+{
+  "cmd": [
+    "node",
+    "/workspace/audit/lighthouse_probe.mjs",
+    "http://127.0.0.1:45859",
+    "/workspace/audit/results"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"accessibility\":{\"score\":0.76,\"title\":\"Accessibility\"},\"best-practices\":{\"score\":0.89,\"title\":\"Best Practices\"},\"seo\":{\"score\":0.9,\"title\":\"SEO\"}}\n",
+  "stderr": "",
+  "seconds": 9.924
+}

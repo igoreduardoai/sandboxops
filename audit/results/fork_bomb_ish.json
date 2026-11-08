@@ -1,0 +1,15 @@
+{
+  "task": "fork_bomb_ish",
+  "goal": "Infinite loop (should time out)",
+  "executed_code": "while True: pass",
+  "sandbox": {
+    "ok": false,
+    "stdout": "",
+    "stderr": "killed by sandbox limit (signal 9)",
+    "code": -9
+  },
+  "verified": false,
+  "ts": "2026-11-08T19:32:20Z",
+  "sha256": "c3e57759f64a3728bcacbc0ed9adc404c6554c6dc3eed8865d6314b2d4929b67",
+  "contained": true
+}

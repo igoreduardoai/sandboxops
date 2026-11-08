@@ -1,0 +1,664 @@
+{
+  "started_utc": "2026-11-08T19:32:03Z",
+  "finished_utc": "2026-11-08T19:32:34Z",
+  "base_url_was_loopback": true,
+  "tested_main_baseline": "16595487162fac6df3f38247b77bd27075291ccc",
+  "documented_demo_ref": "bea5d337dcab77beac6577533c29ed8ff7b31ea4",
+  "head_during_run": "16595487162fac6df3f38247b77bd27075291ccc",
+  "counts": {
+    "pass": 32,
+    "unknown": 5,
+    "fail": 21,
+    "infra_blocker": 1,
+    "not_applicable": 1,
+    "skipped": 1
+  },
+  "check_count": 61,
+  "deterministic_reviewer": {
+    "kind": "deterministic_restatement",
+    "independent_llm_judge": false,
+    "live_evaluator_implemented_in_source": false,
+    "score": null,
+    "prize_odds": null,
+    "readiness": null,
+    "items": [
+      {
+        "check_id": "bill_verified",
+        "status": "pass"
+      },
+      {
+        "check_id": "builtin_socket_contained",
+        "status": "pass"
+      },
+      {
+        "check_id": "builtin_loop_contained",
+        "status": "pass"
+      },
+      {
+        "check_id": "local_host_file_read_blocked",
+        "status": "fail"
+      },
+      {
+        "check_id": "local_host_file_write_blocked",
+        "status": "fail"
+      },
+      {
+        "check_id": "underscore_socket_bypass_blocked",
+        "status": "fail"
+      },
+      {
+        "check_id": "subprocess_localhost_bypass_blocked",
+        "status": "fail"
+      },
+      {
+        "check_id": "local_env_strips_parent",
+        "status": "pass"
+      },
+      {
+        "check_id": "dry_run_flag_ignored",
+        "status": "fail"
+      },
+      {
+        "check_id": "docker_runtime",
+        "status": "infra_blocker"
+      },
+      {
+        "check_id": "docker_argv_stub_contains_documented_flags",
+        "status": "pass"
+      },
+      {
+        "check_id": "evidence_hash_covers_final_record",
+        "status": "fail"
+      },
+      {
+        "check_id": "axe",
+        "status": "fail"
+      },
+      {
+        "check_id": "ui_keyboard_main_journey",
+        "status": "pass"
+      },
+      {
+        "check_id": "public_vm_and_live_inference",
+        "status": "skipped"
+      },
+      {
+        "check_id": "category_saved",
+        "status": "unknown"
+      },
+      {
+        "check_id": "judged_commit_pin",
+        "status": "unknown"
+      },
+      {
+        "check_id": "live_evaluator_present",
+        "status": "unknown"
+      }
+    ]
+  },
+  "checks": [
+    {
+      "id": "baseline_identity",
+      "category": "meta",
+      "status": "pass",
+      "detail": "HEAD 16595487162fac6df3f38247b77bd27075291ccc; baseline 16595487162fac6df3f38247b77bd27075291ccc ancestor=True; demo ref bea5d337dcab77beac6577533c29ed8ff7b31ea4",
+      "evidence": {
+        "head": "16595487162fac6df3f38247b77bd27075291ccc",
+        "head_rc": 0,
+        "head_error": "",
+        "status_porcelain": "?? audit/",
+        "status_rc": 0,
+        "baseline": "16595487162fac6df3f38247b77bd27075291ccc",
+        "documented_demo_ref": "bea5d337dcab77beac6577533c29ed8ff7b31ea4",
+        "baseline_is_ancestor_of_head": true,
+        "diff_demo_to_baseline_name_status": "M\tREADME.md",
+        "product_files_differ_from_baseline": "",
+        "non_readme_files_differ_demo_to_baseline": "",
+        "file_sha256": {
+          "agent.py": "0df33dc60f459adf5190165cac9bd9bb1566318f63b9a4aa39ea33c6177a3b2a",
+          "app.py": "d41deee3ab5114626210dd5ce5d59635a64b045dcb0d172a1904abdd86bb3f1d",
+          "planner.py": "97f33d2b949a837946ce9defb9297793eee3c15fb88f069a68c7a19e2ce52c98",
+          "sandbox.py": "857e9888f0e8dcdb09051a73ed81b3ad69984022d7ba595b3cf8275c8107c26e",
+          "static/index.html": "e269789f706ed955dc76fc7b28328304b70da61563e6d21d39f5623f3587c019",
+          "test_agent.py": "fb2a92979640e1d0799496c5c2143245f8579fa466ad82d0d272f7158d03bf6c",
+          "test_app.py": "2aa3318dc92378bae9359140a473e66d7f28643024c5b583ffc7717242563997",
+          "deploy/sandboxops.service": "72cc57b6de32cadc80d1165b8be3c001daa30ab10ab6330ba3df126026e92ff9",
+          "deploy/vultr-deploy.sh": "001a5088ef98bbe7996da952379cebc57502659f4d2d4709b83ee5cc7c16f613",
+          "docs/LIVE.md": "7f010544522ccf462ddebd6b96a29f35c6b7df50f27b202df1f9eab7c3a7dda6",
+          "README.md": "4c14cbdae7c5b50c0cbfb72cd47bfecb0d28a1ade7fc01008b0d967b65a786d1",
+          "LICENSE": "077030465521bc9e8b1b3e88ff00f7eefe25f69cfb055b74a59f7ed8e1503e91"
+        },
+        "secret_env_present": {
+          "VULTR_INFERENCE_API_KEY": false,
+          "VULTR_API_KEY": false,
+          "OPENAI_API_KEY": false
+        },
+        "docker_which": null,
+        "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+        "etc_sandboxops_env_exists": false
+      }
+    },
+    {
+      "id": "product_tree_dirty",
+      "category": "meta",
+      "status": "pass",
+      "detail": "product files have no uncommitted edits",
+      "dirty": []
+    },
+    {
+      "id": "code_identical_demo_ref_to_baseline",
+      "category": "meta",
+      "status": "pass",
+      "detail": "Executable and non-README files are identical between documented demo ref and tested main baseline"
+    },
+    {
+      "id": "judged_commit_pin",
+      "category": "rules_mapping",
+      "status": "unknown",
+      "detail": "Public entry links the GitHub repo and does not embed either SHA. This audit does not treat tested main as the submitted artifact."
+    },
+    {
+      "id": "upstream_test_agent",
+      "category": "upstream_tests",
+      "status": "pass",
+      "detail": "exit 0 in 5.067s; stdout '[True, True, True] 3/3 passed'",
+      "exit_code": 0,
+      "seconds": 5.067
+    },
+    {
+      "id": "upstream_test_app",
+      "category": "upstream_tests",
+      "status": "pass",
+      "detail": "exit 0 in 6.604s; stdout '[True, True, True, True, True] 5/5 passed'",
+      "exit_code": 0,
+      "seconds": 6.604
+    },
+    {
+      "id": "upstream_exit_code_is_unconditional",
+      "category": "upstream_tests",
+      "status": "fail",
+      "detail": "test_agent.py and test_app.py print a count and do not call sys.exit with a failure status. Exit 0 does not by itself prove a future failure would fail CI.",
+      "source": [
+        "test_agent.py",
+        "test_app.py"
+      ]
+    },
+    {
+      "id": "health_offline_local",
+      "category": "main_journey",
+      "status": "pass",
+      "detail": "HTTP 200 {'status': 'ok', 'backend': 'local', 'planner': 'offline'}",
+      "body": {
+        "status": "ok",
+        "backend": "local",
+        "planner": "offline"
+      }
+    },
+    {
+      "id": "tasks_listed",
+      "category": "main_journey",
+      "status": "pass",
+      "detail": "HTTP 200 keys=['bill', 'network_attempt', 'fork_bomb_ish']"
+    },
+    {
+      "id": "ui_served",
+      "category": "main_journey",
+      "status": "pass",
+      "detail": "HTTP 200 bytes=2080 contains SandboxOps=True; task buttons are client-rendered"
+    },
+    {
+      "id": "bill_verified",
+      "category": "main_journey",
+      "status": "pass",
+      "detail": "HTTP 200 verified=True stdout='551.00' contained=False"
+    },
+    {
+      "id": "builtin_socket_contained",
+      "category": "blast_radius",
+      "status": "pass",
+      "detail": "HTTP 200 contained=True verified=False stderr_tail=':'"
+    },
+    {
+      "id": "builtin_loop_contained",
+      "category": "blast_radius",
+      "status": "pass",
+      "detail": "HTTP 200 in 5.006s contained=True ok=False code=-9 stderr='killed by sandbox limit (signal 9)'. This is the built-in bounded infinite loop, not an unbounded host fork bomb.",
+      "seconds": 5.006
+    },
+    {
+      "id": "bad_json",
+      "category": "failure_recovery",
+      "status": "pass",
+      "detail": "HTTP 400 body=b'{\"error\": \"bad json\"}'"
+    },
+    {
+      "id": "empty_object",
+      "category": "failure_recovery",
+      "status": "pass",
+      "detail": "HTTP 400 body=b'{\"error\": \"task or prompt required\"}'"
+    },
+    {
+      "id": "unknown_get",
+      "category": "failure_recovery",
+      "status": "pass",
+      "detail": "HTTP 404"
+    },
+    {
+      "id": "unknown_task_no_prompt",
+      "category": "failure_recovery",
+      "status": "pass",
+      "detail": "HTTP 400 body=b'{\"error\": \"task or prompt required\"}'"
+    },
+    {
+      "id": "dry_run_flag_ignored",
+      "category": "dry_run_vs_execute",
+      "status": "fail",
+      "detail": "POST {task:bill, dry_run:true} still executed and verified 551.00. No dry_run/dry-run symbol exists in the product modules.",
+      "dry_run_symbol_present": false
+    },
+    {
+      "id": "offline_prompt_does_not_execute",
+      "category": "adversarial_inputs",
+      "status": "pass",
+      "detail": "HTTP 503 planner=offline code=None listener={}"
+    },
+    {
+      "id": "task_precedence_over_prompt",
+      "category": "adversarial_inputs",
+      "status": "pass",
+      "detail": "HTTP 200 task=bill verified=True"
+    },
+    {
+      "id": "prompt_truncated_to_2000",
+      "category": "adversarial_inputs",
+      "status": "pass",
+      "detail": "planner received length 2000 HTTP 503. Stub recorder returned no code; no provider call."
+    },
+    {
+      "id": "planner_exception_structured",
+      "category": "failure_recovery",
+      "status": "fail",
+      "detail": "planner exception HTTP None body=b\"RemoteDisconnected('Remote end closed connection without response')\""
+    },
+    {
+      "id": "server_survives_planner_exception",
+      "category": "failure_recovery",
+      "status": "pass",
+      "detail": "subsequent /health HTTP 200 {'status': 'ok', 'backend': 'local', 'planner': 'offline'}"
+    },
+    {
+      "id": "bill_after_contained_and_errors",
+      "category": "failure_recovery",
+      "status": "pass",
+      "detail": "verified=True stdout='551.00'"
+    },
+    {
+      "id": "local_env_strips_parent",
+      "category": "blast_radius",
+      "status": "pass",
+      "detail": "ok=True keys_line_count=2 canary_visible=False",
+      "stdout": "LC_CTYPE=C.UTF-8\nPATH=/usr/bin:/bin\n"
+    },
+    {
+      "id": "local_python_isolated_flag",
+      "category": "blast_radius",
+      "status": "pass",
+      "detail": "stdout='1' stderr=''"
+    },
+    {
+      "id": "local_host_file_read_blocked",
+      "category": "destructive_boundaries",
+      "status": "fail",
+      "detail": "child_ok=True saw_host_marker=True stderr=''"
+    },
+    {
+      "id": "local_host_file_write_blocked",
+      "category": "destructive_boundaries",
+      "status": "fail",
+      "detail": "child_ok=True marker_written=True stderr=''"
+    },
+    {
+      "id": "local_cwd_outside_repo_and_removed",
+      "category": "blast_radius",
+      "status": "pass",
+      "detail": "cwd='/tmp/tmp61pkykjw' still_exists=False"
+    },
+    {
+      "id": "local_etc_passwd_not_readable",
+      "category": "destructive_boundaries",
+      "status": "fail",
+      "detail": "stdout='readable True'"
+    },
+    {
+      "id": "prelude_blocks_socket_module",
+      "category": "blast_radius",
+      "status": "pass",
+      "detail": "stdout='' listener={} stderr_tail='r'"
+    },
+    {
+      "id": "underscore_socket_bypass_blocked",
+      "category": "blast_radius",
+      "status": "fail",
+      "detail": "stdout='bypassed\\n' listener={'data': 'bypass'} stderr=''"
+    },
+    {
+      "id": "subprocess_localhost_bypass_blocked",
+      "category": "blast_radius",
+      "status": "fail",
+      "detail": "stdout='rc 0\\n\\n\\n' listener={'data': 'child'}"
+    },
+    {
+      "id": "local_single_fork_blocked",
+      "category": "destructive_boundaries",
+      "status": "fail",
+      "detail": "stdout='fork-ok' stderr='' code=0. One child, then exit; not a fork bomb."
+    },
+    {
+      "id": "local_memory_cap",
+      "category": "blast_radius",
+      "status": "pass",
+      "detail": "ok=True code=0 stdout='MemoryError' stderr=''"
+    },
+    {
+      "id": "local_fsize_cap",
+      "category": "blast_radius",
+      "status": "pass",
+      "detail": "ok=True stdout='OSError' stderr=''"
+    },
+    {
+      "id": "docker_runtime",
+      "category": "blast_radius",
+      "status": "infra_blocker",
+      "detail": "docker binary is not installed in this VM (which/docker empty, earlier docker info exit 127). Production container isolation was not executed. This is not a pass."
+    },
+    {
+      "id": "docker_missing_returns_structured_result",
+      "category": "failure_recovery",
+      "status": "fail",
+      "detail": "exit 1 stderr_tail=','",
+      "exit_code": 1
+    },
+    {
+      "id": "docker_argv_stub_contains_documented_flags",
+      "category": "blast_radius",
+      "status": "pass",
+      "detail": "STUB only: subprocess.run was replaced and Docker was not started. Flag construction is not runtime enforcement.",
+      "missing_flags": [],
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "-i",
+        "--network",
+        "none",
+        "--read-only",
+        "--tmpfs",
+        "/tmp:size=16m",
+        "--user",
+        "65534:65534",
+        "--cpus",
+        "0.5",
+        "--memory",
+        "256m",
+        "--pids-limit",
+        "64",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges",
+        "python:3.12-slim",
+        "python",
+        "-I",
+        "-"
+      ],
+      "returned_backend": "docker"
+    },
+    {
+      "id": "evidence_hash_covers_final_record",
+      "category": "evidence",
+      "status": "fail",
+      "detail": "sha256 is computed before contained is added and before an empty negative-code stderr is rewritten. A hash of the returned object does not match the field.",
+      "stored": "b2c194374af1da31edebfb3844e39f7c11e94340cee6569aa859cc18ede219e7",
+      "hash_of_returned": "0bd4090eb06f8722ae0f364c2f141217e932ea713dbe69d76b2c8de684f8d886",
+      "hash_without_sha_and_contained": "b2a3881f0562afe76641d4434ed3afc03721ca74359944509623580d461b0686",
+      "stderr_after": "killed by sandbox limit (signal 9)",
+      "contained": true
+    },
+    {
+      "id": "loop_evidence_stderr_rewritten_after_hash",
+      "category": "evidence",
+      "status": "fail",
+      "detail": "fork_bomb_ish stderr is the post-hash message 'killed by sandbox limit (signal 9)'. stored==reconstructed_empty_stderr:True stored==returned_without_sha_and_contained:False"
+    },
+    {
+      "id": "bill_hash_matches_body_minus_sha_field",
+      "category": "evidence",
+      "status": "fail",
+      "detail": "Recomputed SHA-256 of the bill response with the sha256 field removed does not match; contained is outside the hash (hash_without_sha_and_contained=e648d839ea62418c2680e43675a3a3a50ac840c9a555896888a769ac79a16204)."
+    },
+    {
+      "id": "stub_planner_executes_model_code",
+      "category": "adversarial_inputs",
+      "status": "pass",
+      "detail": "STUB provider. HTTP 200 planner=vultr-inference:glm-5.3 verified=None stdout='4'"
+    },
+    {
+      "id": "stub_dry_run_still_executes",
+      "category": "dry_run_vs_execute",
+      "status": "fail",
+      "detail": "STUB provider. dry_run:true on a prompt still ran the planned code and printed 4."
+    },
+    {
+      "id": "stub_sandbox_hides_canary_and_key",
+      "category": "blast_radius",
+      "status": "pass",
+      "detail": "STUB provider. stdout='canary False\\nkey False\\nnkeys 2'"
+    },
+    {
+      "id": "stub_model_underscore_socket_contained",
+      "category": "adversarial_inputs",
+      "status": "fail",
+      "detail": "STUB provider. Model code using _socket leaked=True contained=False listener={'data': 'stub'} stdout='socket-bypass\\n'"
+    },
+    {
+      "id": "stub_provider_outage_structured",
+      "category": "failure_recovery",
+      "status": "fail",
+      "detail": "STUB URLError HTTP None body=b\"RemoteDisconnected('Remote end closed connection without response')\""
+    },
+    {
+      "id": "health_offline_after_stub_cleanup",
+      "category": "failure_recovery",
+      "status": "pass",
+      "detail": "planner=offline stub_calls=4 hosts=['api.vultrinference.com']"
+    },
+    {
+      "id": "live_evaluator_present",
+      "category": "rules_mapping",
+      "status": "unknown",
+      "detail": "No evaluator or critic module is in this source tree. The deterministic checklist later in this run restates these checks. It is not an independent LLM judge and not a live evaluator.",
+      "source_symbols": {
+        "evaluator_file": [],
+        "critic_mentioned": false
+      }
+    },
+    {
+      "id": "html_lang",
+      "category": "ui_keyboard_axe_lighthouse",
+      "status": "fail",
+      "detail": "index.html root is <html> without lang"
+    },
+    {
+      "id": "textarea_label",
+      "category": "ui_keyboard_axe_lighthouse",
+      "status": "fail",
+      "detail": "The prompt textarea has a placeholder and no label element"
+    },
+    {
+      "id": "banner_live_region",
+      "category": "ui_keyboard_axe_lighthouse",
+      "status": "fail",
+      "detail": "Result banner has no aria-live region"
+    },
+    {
+      "id": "css_contrast_aa_normal_text",
+      "category": "ui_keyboard_axe_lighthouse",
+      "status": "fail",
+      "detail": "WCAG AA 4.5:1 unrounded ratios {'body_text': 16.001, 'health_span_8ab': 7.676, 'button': 4.499, 'banner_ok': 8.028, 'banner_contained': 9.232, 'banner_neutral': 10.678}. Below 4.5: {'button': 4.499}. White on #2f6bff is under 4.5 before rounding."
+    },
+    {
+      "id": "ui_keyboard_main_journey",
+      "category": "ui_keyboard_axe_lighthouse",
+      "status": "pass",
+      "detail": "keyboard contained='\ud83d\uded1 CONTAINED: PermissionError: network disabled in sandbox' offline='\u26a0 LLM planner offline' tab_order=[{'tag': 'BUTTON', 'id': '', 'text': 'bill'}, {'tag': 'BUTTON', 'id': '', 'text': 'network_attempt'}, {'tag': 'BUTTON', 'id': '', 'text': 'fork_bomb_ish'}, {'tag': 'TEXTAREA', 'id': 'p', 'text': 'Ask the agent (uses Vultr Serverless Inference when configur'}, {'tag': 'BUTTON', 'id': '', 'text': 'Plan & run'}, {'tag': 'BODY', 'id': '', 'text': 'SandboxOps \u00b7 Blast Radius Zero\\n\\nPlan \u2192 sandbox \u2192 verify \u2192 ev'}]"
+    },
+    {
+      "id": "axe",
+      "category": "ui_keyboard_axe_lighthouse",
+      "status": "fail",
+      "detail": "axe violations=4 passes=13 incomplete=1",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": [
+                "button:nth-child(1)"
+              ],
+              "html": "<button title=\"Compute patient responsibility for allowed $620+$95+$40 with $500 deductible and 20% coinsurance\">bill</button>"
+            },
+            {
+              "target": [
+                "button:nth-child(2)"
+              ],
+              "html": "<button title=\"Try to exfiltrate data (should be blocked)\">network_attempt</button>"
+            },
+            {
+              "target": [
+                "button:nth-child(3)"
+              ],
+              "html": "<button title=\"Infinite loop (should time out)\">fork_bomb_ish</button>"
+            },
+            {
+              "target": [
+                "body > button"
+              ],
+              "html": "<button onclick=\"run({prompt:document.getElementById('p').value})\">Plan &amp; run</button>"
+            }
+          ]
+        },
+        {
+          "id": "html-has-lang",
+          "impact": "serious",
+          "help": "<html> element must have a lang attribute",
+          "nodes": [
+            {
+              "target": [
+                "html"
+              ],
+              "html": "<html>"
+            }
+          ]
+        },
+        {
+          "id": "landmark-one-main",
+          "impact": "moderate",
+          "help": "Document should have one main landmark",
+          "nodes": [
+            {
+              "target": [
+                "html"
+              ],
+              "html": "<html>"
+            }
+          ]
+        },
+        {
+          "id": "region",
+          "impact": "moderate",
+          "help": "All page content should be contained by landmarks",
+          "nodes": [
+            {
+              "target": [
+                "h1"
+              ],
+              "html": "<h1>SandboxOps <small style=\"color:#8ab\">\u00b7 Blast Radius Zero</small></h1>"
+            },
+            {
+              "target": [
+                "p"
+              ],
+              "html": "<p>Plan \u2192 sandbox \u2192 verify \u2192 evidence. Every agent action runs contained. <span id=\"h\">[backend: local \u00b7 planner: offline]</span></p>"
+            },
+            {
+              "target": [
+                "#p"
+              ],
+              "html": "<textarea id=\"p\" placeholder=\"Ask the agent (uses Vultr Serverless Inference when configured)\" style=\"\"></textarea>"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lighthouse",
+      "category": "ui_keyboard_axe_lighthouse",
+      "status": "pass",
+      "detail": "Lighthouse completed. Category scores are tool output, not a hackathon grade or readiness score.",
+      "categories": {
+        "accessibility": {
+          "score": 0.76,
+          "title": "Accessibility"
+        },
+        "best-practices": {
+          "score": 0.89,
+          "title": "Best Practices"
+        },
+        "seo": {
+          "score": 0.9,
+          "title": "SEO"
+        }
+      },
+      "failing_audit_ids": [
+        "errors-in-console",
+        "color-contrast",
+        "html-has-lang",
+        "meta-description",
+        "font-size"
+      ]
+    },
+    {
+      "id": "retry_loop_implemented",
+      "category": "main_journey",
+      "status": "unknown",
+      "detail": "Pattern A on the event page describes feeding errors back for retries. This source has one execution pass and no retry loop. The page says one or both patterns; absence is recorded, not scored.",
+      "present": false
+    },
+    {
+      "id": "pattern_b_browser_sandbox",
+      "category": "main_journey",
+      "status": "not_applicable",
+      "detail": "No Playwright or browser-sandbox path is in this source. Challenge text says pattern A or pattern B. Not counted as pass or fail."
+    },
+    {
+      "id": "public_vm_and_live_inference",
+      "category": "rules_mapping",
+      "status": "skipped",
+      "detail": "Not run. This audit does not contact http://64.177.13.126/ and does not call Vultr Serverless Inference. README and docs/LIVE.md claim a 2026-11-05 docker/vultr-inference demo. Those claims are not re-verified here."
+    },
+    {
+      "id": "post_submit_edit_semantics",
+      "category": "rules_mapping",
+      "status": "unknown",
+      "detail": "Fetched rule book says submissions close at the event-page deadline plus a five-minute grace period. It does not say whether a later git push changes the judged revision. No behavior fix was applied."
+    },
+    {
+      "id": "category_saved",
+      "category": "rules_mapping",
+      "status": "unknown",
+      "detail": "Anonymous project HTML on this run shows categories [Assistant] and eventTracks []. That does not prove a private form field, and it also does not show a saved C1 track. Not marked pass."
+    }
+  ]
+}

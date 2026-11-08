@@ -1,0 +1,15 @@
+{
+  "task": "bill",
+  "goal": "Compute patient responsibility for allowed $620+$95+$40 with $500 deductible and 20% coinsurance",
+  "executed_code": "a=[620,95,40];d=500;t=0\nfor x in a:\n  k=min(d,x);d-=k;t+=k+(x-k)*0.2\nprint(f'{t:.2f}')",
+  "sandbox": {
+    "ok": true,
+    "stdout": "551.00\n",
+    "stderr": "",
+    "code": 0
+  },
+  "verified": true,
+  "ts": "2026-11-08T19:32:15Z",
+  "sha256": "e648d839ea62418c2680e43675a3a3a50ac840c9a555896888a769ac79a16204",
+  "contained": false
+}
